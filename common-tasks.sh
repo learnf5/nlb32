@@ -3,9 +3,7 @@ set -x
 PS4='+$(date +"%T.%3N"): '
 
 # get lab-info.md for student guide bravais id
-# ORIG line - but I don't think nap-dev is correct
-# curl --silent https://raw.githubusercontent.com/learnf5/nap-dev/main/lab-info.md --output /tmp/lab-info.md
-curl --silent https://raw.githubusercontent.com/learnf5/devnap/main/lab-info.md --output /tmp/lab-info.md
+curl --silent https://raw.githubusercontent.com/learnf5/$COURSE_ID/main/lab-info.md --output /tmp/lab-info.md
 brav_id=$(awk -F '|' "/$LAB_ID/"' {print $2}' /tmp/lab-info.md)
 
 # install student guide
