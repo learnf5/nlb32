@@ -1,0 +1,48 @@
+map $cookie_SESSIONID $route_cookie {
+    ~.+\.(?P<route>\w+)$ $route;
+}
+
+map $request_uri $route_uri {
+    ~SESSIONID=.+\.(?P<route>\w+)$ $route;
+}
+
+#log_format sticky "\nRequest: $request \nStatus: $status \nClient: $remote_addr \nUpstream IP: $upstream_addr \nCookie_SESSIONID: $cookie_SESSIONID \nRequest_URI: $request_uri \nRoute_URI: $route_uri \nRoute_Cookie: $route_cookie \nRoute: $route";
+#log_format sticky "\nMy_cookie: $cookie_my_cookie";
+
+match health_primary {
+    body ~ "nginx on www";
+}
+
+upstream myServers {
+    zone http_backend 64k;
+    server 172.16.20.161:80 route=www1;
+    server 172.16.20.162:80 route=www2;
+    server 172.16.20.163:80 route=www3;
+#    sticky route $route_cookie $route_uri;
+#    sticky cookie my_cookie expires=1h;
+}
+
+server {
+    listen       80 default_server;
+    server_name  localhost;
+
+    error_log /var/log/nginx/myServers.error.log info;
+    access_log /var/log/nginx/myServers.access.log combined;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+        proxy_pass http://myServers;
+        health_check match=health_primary fails=2;
+    }
+
+    location /api/ {
+        api write=on;
+        access_log off;
+    }
+
+    location = /dashboard.html {
+        root /usr/share/nginx/html;
+        access_log off;
+    }
+}
