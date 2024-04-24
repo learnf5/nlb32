@@ -1,0 +1,12 @@
+upstream tcp_backend {
+    zone tcp_upstream 64k;
+    server 172.16.20.161:23;
+    server 172.16.20.162:23;
+    server 172.16.20.163:23;
+}
+
+server {
+    listen 23;
+    proxy_pass tcp_backend;
+    health_check interval=10 passes=3 fails=1; #match=tcp;
+}
