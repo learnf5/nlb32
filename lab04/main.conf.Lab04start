@@ -1,0 +1,33 @@
+match health_primary {
+    body ~ "nginx on www";
+}
+
+upstream myServers {
+    zone http_backend 64k;
+    server 172.16.20.161:80;
+    server 172.16.20.162:80;
+    server 172.16.20.163:80;
+}
+
+server {
+    listen       80 default_server;
+    server_name  localhost;
+
+    error_log /var/log/nginx/myServers.error.log info;
+    access_log /var/log/nginx/myServers.access.log combined;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+        proxy_pass http://myServers;
+        health_check match=health_primary fails=2;
+    }
+
+    location /api/ {
+        api write=on;
+    }
+
+    location = /dashboard.html {
+        root /usr/share/nginx/html;
+    }
+}
