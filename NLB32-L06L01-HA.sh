@@ -10,3 +10,6 @@ curl --silent --remote-name-all --output-dir /tmp https://raw.githubusercontent.
 sudo scp /tmp/tcp_lb.conf nginx:/etc/nginx/conf.d/
 curl --silent --remote-name-all --output-dir /tmp https://raw.githubusercontent.com/learnf5/nlb32/main/lab06/nginx.conf
 sudo scp /tmp/nginx.conf nginx:/etc/nginx/
+
+#Add nginx license to nginx2 lab system, required for keepalived setup
+sudo scp /tmp/nginx-repo* nginx2:/etc/ssl/nginx/
