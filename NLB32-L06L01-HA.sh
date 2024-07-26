@@ -27,8 +27,7 @@ sudo scp /tmp/hosts nginx2:/etc/hosts
 curl --silent https://raw.githubusercontent.com/learnf5/$COURSE_ID/main/lab-info.md --output /tmp/lab-info.md
 brav_id=$(awk -F '|' "/$LAB_ID/"' {print $2}' /tmp/lab-info.md)
 
-cp /home/student/Desktop/Lab_Guide.desktop /tmp/NGINX_Lab_Guide.desktop
-sed '$d' /tmp/NGINX_Lab_Guide.desktop
+head -7 /home/student/Desktop/Lab_Guide.desktop > /tmp/NGINX_Lab_Guide.desktop
 echo Exec=firefox https://f5.bravais.com/s/$brav_id >> /tmp/NGINX_Lab_Guide.desktop
 
 sudo scp /tmp/NGINX_Lab_Guide.desktop nginx:/home/student/Desktop/Lab_Guide.desktop
