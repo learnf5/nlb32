@@ -16,3 +16,12 @@ sudo scp /tmp/nginx-repo* nginx2:/etc/ssl/nginx/
 sudo ssh nginx mkdir /etc/nginx/tcp
 curl --silent --remote-name-all --output-dir /tmp https://raw.githubusercontent.com/learnf5/nlb32/main/lab06/tcp_lb.conf
 sudo scp /tmp/tcp_lb.conf nginx:/etc/nginx/tcp
+
+
+#Put Lab Guide onto both NGINX servers
+sudo scp /home/student/Desktop/Lab_Guide.desktop nginx:/home/student/Desktop/Lab_Guide.desktop
+sudo scp /home/student/Desktop/Lab_Guide.desktop nginx2:/home/student/Desktop/Lab_Guide.desktop
+ssh nginx gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
+ssh nginx chmod +x /home/student/Desktop/Lab_Guide.desktop
+ssh nginx2 gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
+ssh nginx2 chmod +x /home/student/Desktop/Lab_Guide.desktop
