@@ -27,11 +27,11 @@ cp /home/student/Desktop/Lab_Guide.desktop /tmp/NGINX_Lab_Guide.desktop
 sed '$d' /tmp/NGINX_Lab_Guide.desktop
 echo Exec=firefox https://f5.bravais.com/s/$brav_id >> /tmp/NGINX_Lab_Guide.desktop
 
-scp /tmp/NGINX_Lab_Guide.desktop nginx:/home/student/Desktop/Lab_Guide.desktop
-scp /tmp/NGINX_Lab_Guide.desktop nginx2:/home/student/Desktop/Lab_Guide.desktop
+sudo scp /tmp/NGINX_Lab_Guide.desktop nginx:/home/student/Desktop/Lab_Guide.desktop
+sudo scp /tmp/NGINX_Lab_Guide.desktop nginx2:/home/student/Desktop/Lab_Guide.desktop
 
-ssh nginx gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
-ssh nginx chmod +x /home/student/Desktop/Lab_Guide.desktop
+sudo ssh nginx gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
+sudo ssh nginx chmod +x /home/student/Desktop/Lab_Guide.desktop
 
-ssh nginx2 gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
-ssh nginx2 chmod +x /home/student/Desktop/Lab_Guide.desktop
+sudo ssh nginx2 gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
+sudo ssh nginx2 chmod +x /home/student/Desktop/Lab_Guide.desktop
