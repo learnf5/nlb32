@@ -23,12 +23,15 @@ sudo scp /tmp/tcp_lb.conf nginx:/etc/nginx/tcp
 curl --silent https://raw.githubusercontent.com/learnf5/$COURSE_ID/main/lab-info.md --output /tmp/lab-info.md
 brav_id=$(awk -F '|' "/$LAB_ID/"' {print $2}' /tmp/lab-info.md)
 
-sudo scp /home/student/Desktop/Lab_Guide.desktop nginx:/home/student/Desktop/Lab_Guide.desktop
-sudo scp /home/student/Desktop/Lab_Guide.desktop nginx2:/home/student/Desktop/Lab_Guide.desktop
-echo Exec=firefox --app=https://f5.bravais.com/s/$brav_id >>/home/student/Desktop/Lab_Guide.desktop
+cp /home/student/Desktop/Lab_Guide.desktop /tmp/NGINX_Lab_Guide.desktop
+sed '$d' /tmp/NGINX_Lab_Guide.desktop
+echo Exec=firefox https://f5.bravais.com/s/$brav_id >> /tmp/NGINX_Lab_Guide.desktop
+
+scp /tmp/NGINX_Lab_Guide.desktop nginx:/home/student/Desktop/Lab_Guide.desktop
+scp /tmp/NGINX_Lab_Guide.desktop nginx2:/home/student/Desktop/Lab_Guide.desktop
+
 ssh nginx gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
 ssh nginx chmod +x /home/student/Desktop/Lab_Guide.desktop
 
-echo Exec=firefox --app=https://f5.bravais.com/s/$brav_id >>/home/student/Desktop/Lab_Guide.desktop
 ssh nginx2 gio set /home/student/Desktop/Lab_Guide.desktop /home/student/Desktop/Lab_Guide.desktop::trusted true
 ssh nginx2 chmod +x /home/student/Desktop/Lab_Guide.desktop
