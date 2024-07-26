@@ -18,8 +18,9 @@ curl --silent --remote-name-all --output-dir /tmp https://raw.githubusercontent.
 sudo scp /tmp/tcp_lb.conf nginx:/etc/nginx/tcp
 
 #Add nginx servers to /etc/hosts file
-sudo ssh nginx echo 10.10.1.62 nginx2 >> /etc/hosts
-sudo ssh nginx2 echo 10.10.1.61 nginx >> /etc/hosts
+curl --silent --remote-name-all --output-dir /tmp https://raw.githubusercontent.com/learnf5/nlb32/main/lab06/hosts
+sudo scp /tmp/hosts nginx:/etc/hosts
+sudo scp /tmp/hosts nginx2:/etc/hosts
 
 #Put Lab Guide onto both NGINX servers
 # get lab-info.md for student guide bravais id
