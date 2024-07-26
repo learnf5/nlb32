@@ -35,6 +35,8 @@ sudo scp /tmp/NGINX_Lab_Guide.desktop nginx2:/home/student/Desktop/Lab_Guide.des
 
 sudo ssh nginx gio set /home/student/Desktop/Lab_Guide.desktop metadata::trusted true
 sudo ssh nginx chmod +x /home/student/Desktop/Lab_Guide.desktop
+sudo ssh nginx chmown student.student /home/student/Desktop/Lab_Guide.desktop
 
 sudo ssh nginx2 gio set /home/student/Desktop/Lab_Guide.desktop metadata::trusted true
 sudo ssh nginx2 chmod +x /home/student/Desktop/Lab_Guide.desktop
+sudo ssh nginx2 chmown student.student /home/student/Desktop/Lab_Guide.desktop
