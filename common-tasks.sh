@@ -31,12 +31,14 @@ chmod +x /home/student/Desktop/Lab_Guide.desktop
 
 # install nginx license - EXPIRES March 2, 2025
 set +x
-curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token $LIC_TOKEN" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-March-2-2025/nginx-repo.{crt,key,jwt}
-echo curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-March-2-2025/nginx-repo.{crt,key,jwt}
+curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token $LIC_TOKEN" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-March-26-2025/nginx-repo.{crt,key}
+echo curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-March-26-2025/nginx-repo.{crt,key}
+curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token $LIC_TOKEN" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-March-26-2025/nginx-one-eval.jwt
+echo curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-March-26-2025/nginx-one-eval.jwt
 set -x
 until sudo scp /tmp/nginx-repo.crt nginx:/etc/ssl/nginx/nginx-repo.crt || (( count++ > 5 )); do sleep 5; done
 until sudo scp /tmp/nginx-repo.key nginx:/etc/ssl/nginx/nginx-repo.key || (( count++ > 5 )); do sleep 5; done
-until sudo scp /tmp/nginx-repo.jwt nginx:/etc/nginx/license.jwt || (( count++ > 5 )); do sleep 5; done
+until sudo scp /tmp/nginx-one-eval.jwt nginx:/etc/nginx/license.jwt || (( count++ > 5 )); do sleep 5; done
 # run this lab's specific tasks saved on GitHub
 curl --silent --output /tmp/$LAB_ID.sh https://raw.githubusercontent.com/learnf5/$COURSE_ID/main/$LAB_ID.sh
 bash -x /tmp/$LAB_ID.sh
