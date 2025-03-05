@@ -1,4 +1,4 @@
-# enable debugging
+a# enable debugging
 set -x
 PS4='+$(date +"%T.%3N"): '
 
@@ -10,7 +10,8 @@ curl --silent --remote-name-all --output-dir /tmp https://raw.githubusercontent.
 sudo scp /tmp/nginx.conf nginx:/etc/nginx/
 
 #Add nginx license to nginx2 lab system, required for keepalived setup
-sudo scp /tmp/nginx-repo* nginx2:/etc/ssl/nginx/
+sudo scp /tmp/nginx-one-eval.{crt,key} nginx2:/etc/ssl/nginx/
+sudo scp /tmp/nginx-one-eval.jwt nginx2:/etc/nginx/license.jwt
 
 #This tcp directory created in lab 5, so it should carry on
 sudo ssh nginx mkdir /etc/nginx/tcp
