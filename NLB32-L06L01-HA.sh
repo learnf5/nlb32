@@ -1,4 +1,4 @@
-a# enable debugging
+# enable debugging
 set -x
 PS4='+$(date +"%T.%3N"): '
 
