@@ -33,5 +33,6 @@ curl --silent --output /tmp/$LAB_ID.sh https://raw.githubusercontent.com/learnf5
 bash -x /tmp/$LAB_ID.sh
 
 # restart NGINX
+set +x
 sudo ssh nginx systemctl stop nginx
 sudo ssh nginx systemctl start nginx
