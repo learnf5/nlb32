@@ -20,7 +20,7 @@ echo Exec=google-chrome --app=https://f5.bravais.com/s/$brav_id >>/home/student/
 gio set /home/student/Desktop/Lab_Guide.desktop metadata::trusted true
 chmod +x /home/student/Desktop/Lab_Guide.desktop
 
-# install 30 day nginx one trial licenses from Salesforce - EXPIRES April 4, 2025
+# install 30 day nginx one trial licenses from Salesforce - EXPIRES May 22, 2025
 set +x
 curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token $TOKEN" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-May-22-2025/nginx-one-eval.{crt,key,jwt}
 echo curl --silent --remote-name-all --output-dir /tmp --header "Authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" https://raw.githubusercontent.com/learnf5/eval-reg-keys/main/nginx/EXPIRES-May-22-2025/nginx-one-eval.{crt,key,jwt}
